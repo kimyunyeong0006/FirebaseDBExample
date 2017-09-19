@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "파베:mainActivity";
@@ -28,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         mNameTextView = (TextView)findViewById(R.id.profile_name);
         mGithubTextView = (TextView)findViewById(R.id.profile_github);
         mProfilImageView = (ImageView)findViewById(R.id.profile_image);
+
+        Picasso.with(this)
+                .load("http://i.imgur.com/DvpvklR.png")
+                .centerCrop()
+                .resize(100,100)
+                .into(mProfilImageView);
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();

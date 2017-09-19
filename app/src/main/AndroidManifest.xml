@@ -3,7 +3,7 @@
     package="kr.hs.emirim.iuki1.firebasedbexample">
     
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    
+
     
     <application
         android:allowBackup="true"
