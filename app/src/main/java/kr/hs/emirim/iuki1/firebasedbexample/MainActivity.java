@@ -1,8 +1,11 @@
 package kr.hs.emirim.iuki1.firebasedbexample;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     static final String TAG = "파베:mainActivity";
 
     private TextView mNameTextView;
@@ -59,5 +62,18 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.profile_github:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse( mGithubTextView.getText().toString() );
+                intent.setData(uri);
+                startActivity(intent);
+            break;
+        }
+
     }
 }
