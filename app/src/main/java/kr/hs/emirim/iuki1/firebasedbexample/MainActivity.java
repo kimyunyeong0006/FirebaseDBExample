@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mNameTextView;
     private TextView mGithubTextView;
     private ImageView mProfilImageView;
+    FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .centerCrop()
                 .resize(100,100)
                 .into(mProfilImageView);
+
+        mDatabase = FirebaseDatabase.getInstance();
+
+
+        DatabaseReference profileNameRef = mDatabase.getReference("profile/name");
+
+        ValueEventListener profileNameListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.getValue(String.class);
+                mNameTextView.setText(name);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        profileNameRef.addValueEventListener(profileNameListener);
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
